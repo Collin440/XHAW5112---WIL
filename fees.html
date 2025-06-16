@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fees - Empowering the Nation</title>
+  <link rel="stylesheet" href="fees.css" />
+</head>
+<body>
+  <video autoplay muted loop id="background-video">
+    <source src="videos/landscaping.mp4" type="video/mp4" />
+  </video>
+
+  <div class="overlay">
+    <header>
+      <img src="images/etn-logo.jpg" alt="Empowering the Nation Logo" class="logo" />
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="fees.html" class="active">Fees</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="quote.html">Quote</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="container">
+      <h1>Course Fees & Discounts</h1>
+      <p>Select the courses below to see fees and applicable discounts.</p>
+
+      <section class="courses-list">
+        <h2>6-Month Courses (R1500 each)</h2>
+        <div class="cards">
+          <div class="card">
+            <h3>First Aid</h3>
+            <p>R1500</p>
+            <button class="select-course" data-name="First Aid" data-price="1500">Select</button>
+          </div>
+          <div class="card">
+            <h3>Sewing</h3>
+            <p>R1500</p>
+            <button class="select-course" data-name="Sewing" data-price="1500">Select</button>
+          </div>
+          <div class="card">
+            <h3>Landscaping</h3>
+            <p>R1500</p>
+            <button class="select-course" data-name="Landscaping" data-price="1500">Select</button>
+          </div>
+          <div class="card">
+            <h3>Life Skills</h3>
+            <p>R1500</p>
+            <button class="select-course" data-name="Life Skills" data-price="1500">Select</button>
+          </div>
+        </div>
+
+        <h2>6-Week Short Skills Courses (R750 each)</h2>
+        <div class="cards">
+          <div class="card">
+            <h3>Child Minding</h3>
+            <p>R750</p>
+            <button class="select-course" data-name="Child Minding" data-price="750">Select</button>
+          </div>
+          <div class="card">
+            <h3>Cooking</h3>
+            <p>R750</p>
+            <button class="select-course" data-name="Cooking" data-price="750">Select</button>
+          </div>
+          <div class="card">
+            <h3>Garden Maintenance</h3>
+            <p>R750</p>
+            <button class="select-course" data-name="Garden Maintenance" data-price="750">Select</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="cart-section">
+        <h2>Your Selected Courses</h2>
+        <ul id="cart-list">
+          <li>No courses selected yet.</li>
+        </ul>
+        <div class="price-summary">
+          <p>Total Price: <span id="total-price">R0</span></p>
+          <p>Discount: <span id="discount-percent">0%</span></p>
+          <p><strong>Final Price: <span id="final-price">R0</span></strong></p>
+        </div>
+        <button id="checkout-btn" disabled>Proceed to Checkout</button>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const courses = {};
+    const cartList = document.getElementById('cart-list');
+    const totalPriceEl = document.getElementById('total-price');
+    const discountPercentEl = document.getElementById('discount-percent');
+    const finalPriceEl = document.getElementById('final-price');
+    const checkoutBtn = document.getElementById('checkout-btn');
+
+    function calculateDiscount(numCourses) {
+      if (numCourses === 1) return 0;
+      if (numCourses === 2) return 5;
+      if (numCourses === 3) return 10;
+      if (numCourses > 3) return 15;
+      return 0;
+    }
+
+    function updateCart() {
+      const selectedCourses = Object.values(courses);
+      cartList.innerHTML = '';
+
+      if (selectedCourses.length === 0) {
+        cartList.innerHTML = '<li>No courses selected yet.</li>';
+        totalPriceEl.textContent = 'R0';
+        discountPercentEl.textContent = '0%';
+        finalPriceEl.textContent = 'R0';
+        checkoutBtn.disabled = true;
+        return;
+      }
+
+      selectedCourses.forEach(course => {
+        const li = document.createElement('li');
+        li.textContent = `${course.name} - R${course.price}`;
+        const removeBtn = document.createElement('button');
+        removeBtn.textContent = 'Remove';
+        removeBtn.classList.add('remove-btn');
+        removeBtn.onclick = () => {
+          delete courses[course.name];
+          updateCart();
+          updateButtons();
+        };
+        li.appendChild(removeBtn);
+        cartList.appendChild(li);
+      });
+
+      const total = selectedCourses.reduce((acc, cur) => acc + cur.price, 0);
+      const discountPercent = calculateDiscount(selectedCourses.length);
+      const discountAmount = (total * discountPercent) / 100;
+      const finalPrice = total - discountAmount;
+
+      totalPriceEl.textContent = `R${total.toFixed(2)}`;
+      discountPercentEl.textContent = `${discountPercent}%`;
+      finalPriceEl.textContent = `R${finalPrice.toFixed(2)}`;
+
+      checkoutBtn.disabled = false;
+    }
+
+    function updateButtons() {
+      document.querySelectorAll('.select-course').forEach(btn => {
+        const courseName = btn.dataset.name;
+        if (courses[courseName]) {
+          btn.textContent = 'Selected';
+          btn.disabled = true;
+          btn.classList.add('selected');
+        } else {
+          btn.textContent = 'Select';
+          btn.disabled = false;
+          btn.classList.remove('selected');
+        }
+      });
+    }
+
+    document.querySelectorAll('.select-course').forEach(button => {
+      button.addEventListener('click', () => {
+        const name = button.dataset.name;
+        const price = parseFloat(button.dataset.price);
+        courses[name] = { name, price };
+        updateCart();
+        updateButtons();
+      });
+    });
+
+    checkoutBtn.addEventListener('click', () => {
+      // Redirect to a payment page with selected courses. This is just a demo for my WIL assignment.
+      // Here I'll just alert and reset cart for demonstration.
+      alert(`Proceeding to checkout with ${Object.keys(courses).length} courses.\nFinal Price: ${finalPriceEl.textContent}`);
+      
+    });
+  </script>
+</body>
+</html>

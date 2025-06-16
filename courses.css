@@ -1,0 +1,162 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  color: #1b3d2f; /* Fern green */
+  background: rgba(255, 255, 255, 0.8);
+  position: relative;
+  z-index: 1;
+}
+
+/* Background video */
+#background-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  opacity: 0.25;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-bottom: 2px solid #a1887f; /* Brown hint */
+}
+
+.logo {
+  height: 60px;
+  border-radius: 8px;
+}
+
+.home-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.home-button:hover {
+  background-color: #388e3c;
+}
+
+/* Main heading */
+main {
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #1b3d2f;
+}
+
+/* Course clusters */
+.course-cluster {
+  background-color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 30px;
+  padding: 20px;
+  border-left: 5px solid #4caf50;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.course-cluster h2 {
+  color: #2e7d32;
+  margin-bottom: 15px;
+}
+
+.courses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.courses label {
+  background-color: #e8f5e9;
+  border: 1px solid #c8e6c9;
+  padding: 12px 20px;
+  border-radius: 8px;
+  flex: 1 1 calc(50% - 20px);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.courses label:hover {
+  background-color: #dcedc8;
+}
+
+/* Price summary */
+.price-display {
+  background-color: #f1f8e9;
+  border: 2px dashed #81c784;
+  padding: 20px;
+  margin-top: 20px;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.price-display p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.price-display strong {
+  font-size: 20px;
+  color: #2e7d32;
+}
+
+/* Cart Button */
+.cart-button-container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.cart-button {
+  background-color: #4caf50;
+  color: white;
+  text-decoration: none;
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+}
+
+.cart-button:hover {
+  background-color: #2e7d32;
+}
+
+@media (max-width: 600px) {
+  .courses label {
+    flex: 1 1 100%;
+  }
+
+  .logo {
+    height: 45px;
+  }
+
+  .home-button {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+}

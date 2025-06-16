@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us - Empowering the Nation</title>
+  <link rel="stylesheet" href="contact.css" />
+</head>
+<body>
+
+  <!-- Background Video -->
+  <video autoplay muted loop id="background-video">
+    <source src="videos/landscaping.mp4" type="video/mp4" />
+  </video>
+
+  <div class="overlay">
+
+    <!-- Header -->
+    <header>
+      <img src="images/etn-logo.jpg" alt="Empowering the Nation Logo" class="logo" />
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Contact Section -->
+    <main class="contact-section">
+      <h1>Contact Us</h1>
+
+      <div class="contact-cards">
+        <div class="card">
+          <h2>Reach Out</h2>
+          <p>Phone/WhatsApp: <a href="https://wa.me/27646503212" target="_blank">064 650 3212</a></p>
+          <p>TikTok: <a href="https://www.tiktok.com/@collinbeatz_dev" target="_blank">@collinbeatz_dev</a></p>
+          <p>Locations:</p>
+          <ul>
+            <li>1 Biccard Street, Braamfontein, Johannesburg</li>
+            <li>41 Kruis Street, Marshalltown, Johannesburg</li>
+            <li>11 Ruby Close, Witkoppen, Sandton 2068</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>Send an Enquiry</h2>
+          <form>
+            <input type="text" placeholder="Your Name" required />
+            <input type="email" placeholder="Your Email" required />
+            <textarea placeholder="Your Message" required></textarea>
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Google Maps with 3 locations as per the WIL requirements -->
+      <div class="map-container">
+        <h3>Our Locations</h3>
+
+        <iframe
+          src="https://www.google.com/maps?q=1+Biccard+Street,+Braamfontein,+Johannesburg&output=embed"
+          allowfullscreen loading="lazy">
+        </iframe>
+
+        <iframe
+          src="https://www.google.com/maps?q=41+Kruis+Street,+Marshalltown,+Johannesburg&output=embed"
+          allowfullscreen loading="lazy">
+        </iframe>
+
+        <iframe
+          src="https://www.google.com/maps?q=11+Ruby+Close,+Witkoppen,+Sandton+2068&output=embed"
+          allowfullscreen loading="lazy">
+        </iframe>
+      </div>
+
+      <div class="back-home">
+        <a href="index.html" class="cta-button">← Back to Home</a>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Empowering the Nation. All rights reserved.</p>
+    </footer>
+
+  </div>
+</body>
+</html>

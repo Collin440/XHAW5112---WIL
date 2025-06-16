@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Courses | Empowering the Nation</title>
+  <link rel="stylesheet" href="courses.css" />
+</head>
+<body>
+
+  <!-- Background video -->
+  <video autoplay muted loop id="background-video">
+    <source src="videos/landscaping.mp4" type="video/mp4">
+  </video>
+
+  <header>
+    <img src="images/etn-logo.jpg" alt="Empowering the Nation Logo" class="logo" />
+    <nav>
+      <a href="index.html" class="home-button">← Back to Home</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Our Courses</h1>
+
+    <!-- 6 Month Courses -->
+    <section class="course-cluster">
+      <h2>6 Month Courses (R1500 each)</h2>
+      <div class="courses">
+        <label><input type="checkbox" class="course-checkbox" value="1500" /> First Aid</label>
+        <label><input type="checkbox" class="course-checkbox" value="1500" /> Sewing</label>
+        <label><input type="checkbox" class="course-checkbox" value="1500" /> Landscaping</label>
+        <label><input type="checkbox" class="course-checkbox" value="1500" /> Life Skills</label>
+      </div>
+    </section>
+
+    <!-- 6 Week Courses -->
+    <section class="course-cluster">
+      <h2>6 Week Short Courses (R750 each)</h2>
+      <div class="courses">
+        <label><input type="checkbox" class="course-checkbox" value="750" /> Child Minding</label>
+        <label><input type="checkbox" class="course-checkbox" value="750" /> Cooking</label>
+        <label><input type="checkbox" class="course-checkbox" value="750" /> Garden Maintenance</label>
+      </div>
+    </section>
+
+    <!-- Pricing Summary -->
+    <div class="price-display">
+      <p>Subtotal: R<span id="subtotal">0</span></p>
+      <p>Discount: R<span id="discount">0</span></p>
+      <p><strong>Total: R<span id="total">0</span></strong></p>
+    </div>
+
+    <!-- Cart Button -->
+    <div class="cart-button-container">
+      <a id="cart-button" href="checkout.html" class="cart-button" style="display: none;">Proceed to Cart</a>
+    </div>
+
+    <script>
+      const checkboxes = document.querySelectorAll('.course-checkbox');
+      const subtotalElem = document.getElementById('subtotal');
+      const discountElem = document.getElementById('discount');
+      const totalElem = document.getElementById('total');
+      const cartButton = document.getElementById('cart-button');
+
+      checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updatePrices);
+      });
+
+      function updatePrices() {
+        let subtotal = 0;
+        let selectedCount = 0;
+
+        checkboxes.forEach(checkbox => {
+          if (checkbox.checked) {
+            subtotal += parseInt(checkbox.value);
+            selectedCount++;
+          }
+        });
+
+        let discountRate = 0;
+        if (selectedCount === 2) discountRate = 0.05;
+        else if (selectedCount === 3) discountRate = 0.10;
+        else if (selectedCount > 3) discountRate = 0.15;
+
+        let discountAmount = subtotal * discountRate;
+        let total = subtotal - discountAmount;
+
+        subtotalElem.textContent = subtotal.toFixed(2);
+        discountElem.textContent = discountAmount.toFixed(2);
+        totalElem.textContent = total.toFixed(2);
+
+        // Show cart button only if a course is selected
+        cartButton.style.display = selectedCount > 0 ? 'inline-block' : 'none';
+      }
+    </script>
+  </main>
+</body>
+</html>
